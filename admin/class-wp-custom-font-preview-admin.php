@@ -78,6 +78,20 @@ class Wp_Custom_Font_Preview_Admin {
 
 
     /**
+     * Add BSF Custom Fonts Content.
+     *
+     * @since    1.0.0
+     */
+    public function add_custom_font_preview_content(   ) {
+
+        echo '<h2>WP Custom Font Preview</h2>';
+        echo '<p>To add the input box for the custom font preview, use the shortcode [custom_font_preview_input] <br>Then, copy the shortcodes of the fonts that you would like to see a preview of.</p>';
+
+    }
+
+
+
+    /**
      * Add BSF Custom Fonts Taxonomy admin column.
      *
      * @since    1.0.0
