@@ -61,18 +61,6 @@ class Wp_Custom_Font_Preview_Public {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Wp_Custom_Font_Preview_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Wp_Custom_Font_Preview_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-custom-font-preview-public.css', array(), $this->version, 'all' );
 
 	}
@@ -84,17 +72,14 @@ class Wp_Custom_Font_Preview_Public {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Wp_Custom_Font_Preview_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Wp_Custom_Font_Preview_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+
+        wp_deregsiter_script('jquery');
+        wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', array(), '1.10.2', true);
+        wp_enqueue_script('jquery');
+
+        wp_register_script('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array(), '3.3.7', true);
+        wp_enqueue_script('bootstrap');
+        
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-custom-font-preview-public.js', array( 'jquery' ), $this->version, false );
 
