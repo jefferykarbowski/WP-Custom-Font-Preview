@@ -157,6 +157,9 @@ class Wp_Custom_Font_Preview {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+        $this->loader->add_filter( 'manage_edit-bsf_custom_fonts_columns', $plugin_admin, 'add_bsf_custom_fonts_custom_column', 100, 1 );
+        $this->loader->add_filter( 'manage_bsf_custom_fonts_custom_column', $plugin_admin, 'add_bsf_custom_fonts_custom_column_content', 100, 3 );
+
 	}
 
 	/**

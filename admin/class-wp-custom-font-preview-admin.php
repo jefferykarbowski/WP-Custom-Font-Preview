@@ -61,18 +61,6 @@ class Wp_Custom_Font_Preview_Admin {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Wp_Custom_Font_Preview_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Wp_Custom_Font_Preview_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-custom-font-preview-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -84,20 +72,38 @@ class Wp_Custom_Font_Preview_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Wp_Custom_Font_Preview_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Wp_Custom_Font_Preview_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-custom-font-preview-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
+
+
+    /**
+     * Add BSF Custom Fonts Taxonomy admin column.
+     *
+     * @since    1.0.0
+     */
+    public function add_bsf_custom_fonts_custom_column( $columns ) {
+
+        $columns['bsf_custom_fonts_preview_shortcode'] = __( 'Preview Shortcode', 'wp-custom-font-preview' );
+        return $columns;
+
+    }
+
+
+    /**
+     * Add shortcode to BSF Custom Fonts Taxonomy admin column.
+     *
+     * @since    1.0.0
+     */
+    public function add_bsf_custom_fonts_custom_column_content( $content,$column_name,$term_id ) {
+
+        switch ($column_name) {
+            case 'bsf_custom_fonts_preview_shortcode':
+                $content = '[wp_custom_font_preview id="'.$term_id.'"]';
+                break;
+        }
+        return $content;
+
+    }
 
 }
