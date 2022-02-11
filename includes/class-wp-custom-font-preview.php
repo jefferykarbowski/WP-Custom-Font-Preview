@@ -157,8 +157,11 @@ class Wp_Custom_Font_Preview {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-        $this->loader->add_filter( 'manage_edit-bsf_custom_fonts_columns', $plugin_admin, 'add_bsf_custom_fonts_custom_column', 100, 1 );
-        $this->loader->add_filter( 'manage_bsf_custom_fonts_custom_column', $plugin_admin, 'add_bsf_custom_fonts_custom_column_content', 100, 3 );
+        $this->loader->add_action( 'bsf_custom_fonts_pre_add_form', $plugin_admin, 'add_custom_font_preview_content', 99 );
+
+        $this->loader->add_filter( 'manage_edit-bsf_custom_fonts_columns', $plugin_admin, 'add_bsf_custom_fonts_custom_column', 20, 1 );
+        $this->loader->add_filter( 'manage_bsf_custom_fonts_custom_column', $plugin_admin, 'add_bsf_custom_fonts_custom_column_content', 20, 3 );
+
 
 	}
 
@@ -175,6 +178,10 @@ class Wp_Custom_Font_Preview {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+        $this->loader->add_shortcode('custom_font_preview_input', $plugin_public, 'wp_custom_font_preview_input_shortcode');
+        $this->loader->add_shortcode('custom_font_preview', $plugin_public, 'wp_custom_font_preview_shortcode');
+
 
 	}
 

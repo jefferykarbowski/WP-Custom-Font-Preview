@@ -72,17 +72,40 @@ class Wp_Custom_Font_Preview_Public {
 	 */
 	public function enqueue_scripts() {
 
-
-        wp_deregsiter_script('jquery');
-        wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', array(), '1.10.2', true);
-        wp_enqueue_script('jquery');
-
-        wp_register_script('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array(), '3.3.7', true);
-        wp_enqueue_script('bootstrap');
-        
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-custom-font-preview-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-custom-font-preview-public.js', array( 'jquery' ), $this->version, true );
 
 	}
+
+
+    public function wp_custom_font_preview_input_shortcode() {
+
+        ob_start();
+        echo '<input id="wp_custom_font_preview_input" type="text" placeholder="Type Here" />';
+        return ob_get_clean();
+
+    }
+
+
+    public function wp_custom_font_preview_shortcode($atts) {
+
+        // Attributes
+        $atts = shortcode_atts(
+            array(
+                'id' => '',
+            ),
+            $atts,
+            'wp_custom_font_preview'
+        );
+
+        $id = $atts['id'];
+        $font_name = get_term( $id  )->name;
+
+
+        ob_start();
+        echo '<div id="wp_custom_font_preview_output_'. $id  .'" class="wp_custom_font_preview_output" style="font-family:\'' . $font_name . '\'"></div>';
+        return ob_get_clean();
+
+    }
+
 
 }

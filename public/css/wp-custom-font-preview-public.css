@@ -1,4 +1,12 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
+#wp_custom_font_preview_input,
+.wp_custom_font_preview_output {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.wp_custom_font_preview_output {
+    min-height: 70px;
+}
+.wp_custom_font_preview_output {
+    font-size: 1.5em;
+}
