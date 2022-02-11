@@ -80,3 +80,12 @@ function run_wp_custom_font_preview() {
 
 }
 run_wp_custom_font_preview();
+
+
+require plugin_dir_path( __FILE__ ) . 'vendors/plugin-update-checker/plugin-update-checker.php';
+$wp_custom_font_preview_update_checker = Puc_v4_Factory::buildUpdateChecker(
+    'https://github.com/jefferykarbowski/wp_custom_font_preview/',
+    __FILE__,
+    'WP-Custom-Font-Preview'
+);
+$wp_custom_font_preview_update_checker->setBranch('main');
