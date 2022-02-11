@@ -113,7 +113,7 @@ class Wp_Custom_Font_Preview_Admin {
 
         switch ($column_name) {
             case 'bsf_custom_fonts_preview_shortcode':
-                $content = '[wp_custom_font_preview id="'.$term_id.'"]';
+                $content = '[custom_font_preview id="'.$term_id.'"]';
                 break;
         }
         return $content;
