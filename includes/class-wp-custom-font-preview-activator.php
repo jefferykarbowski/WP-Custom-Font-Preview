@@ -22,14 +22,11 @@
  */
 class Wp_Custom_Font_Preview_Activator {
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
 	public static function activate() {
+
+        if (!is_plugin_active('custom-fonts/custom-fonts.php')) {
+            wp_die(__('You must install and activate the Custom Fonts plugin before activating this plugin. <br><a href="' . admin_url('plugins.php') .'">&laquo; Return to Plugins</a>', 'wp-custom-font-preview'));
+        }
 
 	}
 
