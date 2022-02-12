@@ -85,7 +85,7 @@ class Wp_Custom_Font_Preview_Admin {
     public function add_custom_font_preview_content(   ) {
 
         echo '<h2>WP Custom Font Preview</h2>';
-        echo '<p>To add the input box for the custom font preview, use the shortcode [custom_font_preview_input] <br>Then, copy the shortcodes of the fonts that you would like to see a preview of.</p>';
+        echo '<p>To add the input box for the custom font preview, use the shortcode [custom_font_preview_input] <br>Then, use [custom_font_preview ids="1,2,3"] to display the output for the custom fonts.<br>More help is available in the help tab above.</p>';
 
     }
 
@@ -98,7 +98,7 @@ class Wp_Custom_Font_Preview_Admin {
      */
     public function add_bsf_custom_fonts_custom_column( $columns ) {
 
-        $columns['bsf_custom_fonts_preview_shortcode'] = __( 'Preview Shortcode', 'wp-custom-font-preview' );
+        $columns['bsf_custom_fonts_preview_shortcode'] = __( 'Shortcode ID', 'wp-custom-font-preview' );
         return $columns;
 
     }
@@ -113,11 +113,57 @@ class Wp_Custom_Font_Preview_Admin {
 
         switch ($column_name) {
             case 'bsf_custom_fonts_preview_shortcode':
-                $content = '[custom_font_preview id="'.$term_id.'"]';
+                $content = $term_id;
                 break;
         }
         return $content;
 
     }
+
+
+    /**
+     * Add Custom Font Preview Help tab.
+     *
+     * @since    1.0.0
+     */
+    public function custom_font_preview_help()
+    {
+        $screen = get_current_screen();
+
+        if( !isset($_GET['taxonomy']) ) {
+            return;
+        } else {
+            if( $_GET['taxonomy'] != 'bsf_custom_fonts' ) {
+                return;
+            }
+        }
+
+        $content = '
+            <h3>Custom Font Preview Help</h3>
+            <p>To add the input box for the custom font preview, use the shortcode [custom_font_preview_input] <br>
+            Then you can place a shortcode for the fonts that you would like to see a preview of by using the &#91;custom_font_preview ids="1,2,5"&#93; shortcode with the ids seperated by a comma.</p>
+
+            <h4>Shortcode Attributes</h4>
+            <p>&#91;custom_font_preview_input&#93; shortcode attributes are as follows:</p>
+            <ul>
+                <li><strong>placeholder</strong> - The placeholder for the input defaults to "Type Here".</li>
+                <li><strong>class</strong> - The class for the input.</li>
+            </ul>
+            <p>&#91;custom_font_preview&#93; shortcode attributes are as follows:</p>
+            <ul>
+                <li><strong>ids</strong> * required - The ids of the fonts that you would like to see a preview of seperated by commas.</li>
+                <li><strong>class</strong> - The class for the wrapping tag of the font preview.</li>
+                <li><strong>tag</strong> - The tag of the font preview element defaults to "div".</li>
+            </ul>
+            ';
+
+        $screen->add_help_tab( array(
+            'id' => 'custom_font_preview',
+            'title' => 'Custom Font Preview',
+            'content' => $content,
+        ));
+
+    }
+
 
 }
