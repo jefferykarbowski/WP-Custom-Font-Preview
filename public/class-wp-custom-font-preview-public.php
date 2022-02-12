@@ -77,32 +77,53 @@ class Wp_Custom_Font_Preview_Public {
 	}
 
 
-    public function wp_custom_font_preview_input_shortcode() {
-
+    public function wp_custom_font_preview_input_shortcode($atts) {
+        $a = shortcode_atts( array(
+            'placeholder' => 'Type Here',
+            'class' => '',
+        ), $atts );
         ob_start();
-        echo '<input id="wp_custom_font_preview_input" type="text" placeholder="Type Here" />';
+        echo '<div class="wp-custom-font-preview-input-shortcode-container">';
+        echo '<input type="text" id="wp_custom_font_preview_input" class="'. $a['class'] .'" placeholder="' . $a['placeholder'] . '" />';
+        echo '</div>';
         return ob_get_clean();
 
     }
 
 
     public function wp_custom_font_preview_shortcode($atts) {
-
+        global $post;
         // Attributes
         $atts = shortcode_atts(
             array(
+                'ids' => '',
                 'id' => '',
+                'class' => '',
+                'tag' => 'div',
             ),
             $atts,
             'wp_custom_font_preview'
         );
-
-        $id = $atts['id'];
-        $font_name = get_term( $id  )->name;
-
-
+        if ($atts['id'] == '' && $atts['ids'] == '') {
+            return '<p>Please specify an ID or IDs to preview.</p>';
+        }
+        if ($atts['id'] != '') {
+            $ids = explode(',', $atts['id']);
+        } else {
+            $ids = explode(',', $atts['ids']);
+        }
         ob_start();
-        echo '<div id="wp_custom_font_preview_output_'. $id  .'" class="wp_custom_font_preview_output" style="font-family:\'' . $font_name . '\'"></div>';
+
+        if (! has_shortcode( $post->post_content, 'custom_font_preview_input' ) ) {
+            echo '<p>The Custom Font Preview Input shortcode must be present on the page to use this shortcode.</p>';
+        } else {
+            echo '<div class="wp-custom-font-preview-shortcode-container">';
+            foreach ($ids as $id) {
+                $font_name = get_term( $id  )->name;
+                echo '<' . $atts['tag'] . ' class="wp-custom-font-preview ' . $atts['class'] . '" style="font-family: ' . $font_name . '" data-default-text="' . $font_name . '">' . $font_name . '</' . $atts['tag'] . '>';
+            }
+            echo '</div>';
+        }
         return ob_get_clean();
 
     }
