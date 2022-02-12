@@ -1,2 +1,0 @@
-# WP Custom Font Preview
- 
