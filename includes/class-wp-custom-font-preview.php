@@ -154,6 +154,8 @@ class Wp_Custom_Font_Preview {
 
 		$plugin_admin = new Wp_Custom_Font_Preview_Admin( $this->get_plugin_name(), $this->get_version() );
 
+        $this->loader->add_action( 'admin_head', $plugin_admin, 'custom_font_preview_help' );
+
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
