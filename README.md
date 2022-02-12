@@ -1,4 +1,5 @@
-=== Plugin Name ===
+# WP Custom Font Preview
+
 Contributors: Jeff Williams, Jeffery Karbowski
 Requires at least: 3.0.1
 Tested up to: 3.4
@@ -8,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A wordpress plugin to work with the Custom Font plugin by Brainstorm Force. Offers two shortcodes to display the fonts in real time in your posts and pages.
 
-== Shortcodes ==
+## Shortcodes
 
 To add the input box for the custom font preview, use the shortcode \[custom\_font\_preview\_input\]
 Then you can place a shortcode for the fonts that you would like to see a preview of by using the \[custom\_font\_preview ids="1,2,5"\] shortcode with the ids seperated by a comma.
